@@ -33,6 +33,13 @@ class TaskList:
                 time_diff = (task.deadline - datetime.datetime.now()).total_seconds()
                 time_diff = min(time_diff, closest_time_diff * 2)   # to adjust in case time_diff is too large
                 task.urgency = round((closest_time_diff / time_diff) * 10, 1)
+            else:
+                task.urgency = 0
+
+    def refreshList(self):
+        self.calculateUrgency()
+        self.calculatePriority() 
+        self.sortTasks()
                 
     def triggerCompletion(self, index):
         self.tasks[index].triggerCompletion()

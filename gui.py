@@ -118,7 +118,9 @@ class Gui:
     # Clear the current display
     for row in self.tree.get_children():
         self.tree.delete(row)
-    
+
+    self.task_list.refreshList()
+
     # Re-populate the tree with sorted tasks
     for i, task in enumerate(self.task_list.tasks):
         status = "Complete" if task.is_complete else "Incomplete"
@@ -277,6 +279,9 @@ class Gui:
       task.importance = new_importance
       task.deadline = new_deadline
       self.refreshTaskList()
+
+      for t in  self.task_list.tasks:
+        print(t.task_name)
 
       edit_window.destroy()  # Close the pop-up window
 
