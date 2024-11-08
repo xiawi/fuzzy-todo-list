@@ -280,8 +280,7 @@ class Gui:
       task.deadline = new_deadline
       self.refreshTaskList()
 
-      for t in  self.task_list.tasks:
-        print(t.task_name)
+      self.is_unsaved = True
 
       edit_window.destroy()  # Close the pop-up window
 

@@ -32,7 +32,7 @@ class TaskList:
             if task in deadlined_tasks:
                 time_diff = (task.deadline - datetime.datetime.now()).total_seconds()
                 time_diff = min(time_diff, closest_time_diff * 2)   # to adjust in case time_diff is too large
-                task.urgency = round((closest_time_diff / time_diff) * 10, 1)
+                task.urgency = round((closest_time_diff / time_diff) * 10, 1) if time_diff > 0 else 0
             else:
                 task.urgency = 0
 
@@ -50,7 +50,6 @@ class TaskList:
         for task in self.tasks:
             if task.is_complete == False:
                 task.priority_score = self.priority_scorer.getPriorityScore(task.importance, task.urgency)
-                print(task.task_name, task.urgency, task.priority_score)
             else:
                 task.priority_score = 0
             
