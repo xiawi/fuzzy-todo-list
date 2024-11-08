@@ -2,3 +2,6 @@
 todo.ui
 /__pycache__
 tasks.json
+/dist
+/build
+Fuzzy To-do List.spec

@@ -18,7 +18,7 @@ class TaskList:
         self.tasks.pop(index)
         
     def calculateUrgency(self):
-        deadlined_tasks = [t for t in self.tasks if t.deadline and not t.isComplete]
+        deadlined_tasks = [t for t in self.tasks if t.deadline and not t.is_complete]
         
         if not deadlined_tasks: # return from function if there are no tasks with deadlines (no urgency)
             return
@@ -34,12 +34,12 @@ class TaskList:
                 
     def triggerCompletion(self, index):
         self.tasks[index].triggerCompletion()
-        self.calculatePriority
+        self.calculatePriority()
         self.sortTasks()
                 
     def calculatePriority(self):
         for task in self.tasks:
-            if task.isComplete == False:
+            if task.is_complete == False:
                 task.priority_score = self.priority_scorer.getPriorityScore(task.importance, task.urgency)
             else:
                 task.priority_score = 0
@@ -51,7 +51,7 @@ class TaskList:
         with open(filename, 'w') as file:
             json.dump([task.toDict() for task in self.tasks], file, indent=4)
             
-    def load_from_json(self, filename='tasks.json'):
+    def loadFromJson(self, filename='tasks.json'):
         try:
             with open(filename, 'r') as file:
                 tasks_data = json.load(file)
@@ -64,17 +64,17 @@ class TaskList:
                     )
                     task.urgency = task_data['urgency']
                     task.priority_score = task_data['priority_score']
-                    task.isComplete = task_data['isComplete']
+                    task.is_complete = task_data['is_complete']
                     self.addTask(task)
         except FileNotFoundError:
-            print(f"{filename} not found, starting with an empty task list.")
+            pass
             
     
 # testing purposes            
             
 if __name__ == "__main__":
     task_list = TaskList()
-    task_list.load_from_json()
+    task_list.loadFromJson()
     task_list.addTask(Task("Test", 9, datetime.datetime(2025,1,1)))
     task_list.triggerCompletion(2)
     for task in task_list.tasks:

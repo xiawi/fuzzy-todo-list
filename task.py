@@ -7,10 +7,10 @@ class Task:
         self.deadline = deadline
         self.urgency = 0 if self.deadline == None else None # if there is no deadline, urgency score is automatically set to 0
         self.priority_score = None
-        self.isComplete = False
+        self.is_complete = False
         
     def triggerCompletion(self):
-        self.isComplete = True if self.isComplete == False else False
+        self.is_complete = True if self.is_complete == False else False
         
     def toDict(self):
         task_dict = self.__dict__.copy()
