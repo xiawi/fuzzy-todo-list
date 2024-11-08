@@ -2,6 +2,7 @@ from priority_scorer import FuzzyPriorityScorer
 from task import Task
 import datetime
 import json
+import math
 
 class TaskList:
     def __init__(self):
@@ -11,7 +12,7 @@ class TaskList:
     def addTask(self, task:Task):
         self.tasks.append(task)
         self.calculateUrgency()
-        self.calculatePriority()
+        self.calculatePriority() 
         self.sortTasks()
         
     def deleteTask(self, index):
@@ -30,7 +31,8 @@ class TaskList:
         for task in self.tasks:
             if task in deadlined_tasks:
                 time_diff = (task.deadline - datetime.datetime.now()).total_seconds()
-                task.urgency = round((closest_time_diff / time_diff) * 10, 1) if time_diff > 0 else 0
+                time_diff = min(time_diff, closest_time_diff * 2)   # to adjust in case time_diff is too large
+                task.urgency = round((closest_time_diff / time_diff) * 10, 1)
                 
     def triggerCompletion(self, index):
         self.tasks[index].triggerCompletion()
@@ -41,6 +43,7 @@ class TaskList:
         for task in self.tasks:
             if task.is_complete == False:
                 task.priority_score = self.priority_scorer.getPriorityScore(task.importance, task.urgency)
+                print(task.task_name, task.urgency, task.priority_score)
             else:
                 task.priority_score = 0
             

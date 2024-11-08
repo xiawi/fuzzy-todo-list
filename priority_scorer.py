@@ -85,4 +85,3 @@ class FuzzyPriorityScorer:
 
 if __name__ == "__main__":
     priority_scorer = FuzzyPriorityScorer()
-    print(priority_scorer.getPriorityScore(5,0))
