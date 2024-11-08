@@ -17,9 +17,3 @@ class Task:
         if self.deadline:
             task_dict['deadline'] = self.deadline.isoformat()  # Convert datetime to string
         return task_dict
-        
-# for testing        
-
-# if __name__ == "__main__":
-#     t = Task("test", 10, datetime.datetime(2024,12,12))
-#     print(t.__dict__)

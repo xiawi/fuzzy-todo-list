@@ -71,17 +71,3 @@ class TaskList:
                     self.addTask(task)
         except FileNotFoundError:
             pass
-            
-    
-# testing purposes            
-            
-if __name__ == "__main__":
-    task_list = TaskList()
-    task_list.loadFromJson()
-    task_list.addTask(Task("Test", 9, datetime.datetime(2025,1,1)))
-    task_list.triggerCompletion(2)
-    for task in task_list.tasks:
-        print(task.task_name, task.priority_score)
-    task_list.deleteTask(2)
-    for task in task_list.tasks:
-        print(task.task_name, task.priority_score)

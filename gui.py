@@ -289,11 +289,3 @@ class Gui:
 
     cancel_button = tk.Button(edit_window, text="Cancel", command=cancelChanges)
     cancel_button.grid(row=4, column=1, padx=5, pady=5)
-
-
-# Run the app
-if __name__ == "__main__":
-  root = tk.Tk()
-  tl = TaskList()
-  app = Gui(root, tl)
-  root.mainloop()

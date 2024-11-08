@@ -78,10 +78,3 @@ class FuzzyPriorityScorer:
         self.priority_scorer.input["urgency"] = urgency
         self.priority_scorer.compute()
         return self.priority_scorer.output["priority score"]
-        
-    
-
-# for testing
-
-if __name__ == "__main__":
-    priority_scorer = FuzzyPriorityScorer()
